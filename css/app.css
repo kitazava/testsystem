@@ -1,0 +1,65 @@
+.answers {
+    padding:15px;
+    background:#f7f7f7;
+    margin-top:15px;
+}
+textarea {
+    height:150px;
+}
+.divider {
+    margin-top:10px;
+    padding-top:5px;
+    border-top:#ddd 1px solid;
+}
+.result-print {
+    text-align: center;
+    font-size:30px;
+    font-weight:700;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+html,
+body {
+	height: 100%;
+}
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+.content {
+	flex: 1 0 auto;
+}
+.footer {
+	flex: 0 0 auto;
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    margin: 10% 0% 10% 0%;
+}
+
+.form form{
+    width: 400px;
+}
+
+.main_content{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.my-custom-scrollbar {
+    position: relative;
+    height: 350px;
+    overflow: auto;
+    }
+
+.table-wrapper-scroll-y {
+    display: block;
+}
+
