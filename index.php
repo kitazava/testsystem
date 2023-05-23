@@ -99,11 +99,8 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <div class="text-center mt-5">
-                                <h1><?php echo $testTitle; ?></h1>
-                            </div>
-                            <div class="text-center mt-5">
                                 <p>Вопрос <?php echo $questionNum . ' из ' . $questionCount; ?></p>
-                            </div>
+                            </div> 
                             <div class="card mt-3">
                                 <div class="card-header">
                                     <h3><?php echo $question; ?></h3>

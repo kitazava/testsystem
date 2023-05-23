@@ -1,6 +1,7 @@
 <?php
     include_once  'db.php';
     include_once  './function/connect.php';
+
     $do = trim(strip_tags($_GET['do']));
     if ($do == 'save') {
         $title = trim($_POST['title']);
@@ -40,6 +41,7 @@
                     ':question_id' => $questionId,
                     ':answer' => $answer,
                     ':score' => $score,
+                    
                 ]);
 
                 $answerNum++;

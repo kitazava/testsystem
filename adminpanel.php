@@ -36,7 +36,7 @@
             </form>
         </div>
         <div class="container">
-            <a href="./function/addtest.php" class="btn btn-primary btn-sm">Добавить</a>
+            <a href="addtest.php" class="btn btn-primary btn-sm">Добавить</a>
         </div>
         <div class="container mt-5">
             <div class="table-wrapper-scroll-y my-custom-scrollbar" style="border: 1px solid #000000">
@@ -59,7 +59,7 @@
                             foreach($tests_run as $test):
                                 ?>
                                         <tr>
-                                        <th scope="row"><?php echo $test['id']; ?></th>
+                                        <th scope="row"> <?php echo $test['id'];?> </th>
                                             <td><?php echo $test['title']; ?></td>
                                             <td><?php echo $test['type_language']; ?></td>
                                             <td>

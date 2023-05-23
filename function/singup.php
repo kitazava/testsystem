@@ -15,7 +15,7 @@
         // if (!move_uploaded_file($_FILES['avatar']['tmp_name'], '../' . $path)) {
         //     $_SESSION['message'] = 'Ошибка при загрузке сообщения';
         //     header('Location: ../register.php');
-        // }
+        // 
 
         $password = md5($password);
 

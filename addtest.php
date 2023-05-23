@@ -12,6 +12,9 @@
 <body>
     <div class="d-flex justify-content-center mt-5">
         <div class="col-md-6">
+        <div class="container">
+            <a href="adminpanel.php" class="btn btn-primary btn-sm">Вернуться</a>
+        </div>
         <form action="admin.php?do=save" method="post">
             <div class="card mt-4">
                 <div class="card-header">
