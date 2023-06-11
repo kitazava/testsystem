@@ -31,7 +31,7 @@
                         }
                         else
                         {
-                            echo "No";
+                            echo "Нету";
                         }
                     ?>
                         <button type="submit" class="btn btn-primary">Фильтровать</button>
@@ -68,7 +68,7 @@
                             }
                             else
                             {
-                                echo "No";
+                                echo "Нету";
                             }  
                         }
                     }
@@ -93,7 +93,7 @@
                         }
                         else
                         {
-                            echo "No";
+                            echo "Нету";
                         }
                     }
 

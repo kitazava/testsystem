@@ -1,15 +1,10 @@
-<?php
+<?php 
+    require_once './function/connect.php';
     include_once  'db.php';
-    include_once  './function/connect.php';
-    if(isset($_GET['search'])){
-        $search = $_GET['search'];
-        $search = trim($search);
-        $search = strip_tags($search);
-        $search_sql = "SELECT * FROM tests WHERE title LIKE '%$search%'";
-        $search_run = mysqli_query($connect, $search_sql);
-    } 
+    session_start();
+    $questions = "SELECT * FROM questions WHERE test_id = 5 "; 
+    $questions_run = mysqli_query($connect, $questions);
 ?>
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -50,30 +45,22 @@
                 <div class="col-md-8">
                     <div class="card mt-4">
                         <div class="card-header">
-                            <h2 class="text-center">Результаты поиска</h2>
+                            <h2 class="text-center">Результат</h2>
+
                         </div>
                         <div class="card-body">
-                        <?php 
-                            if(mysqli_num_rows($search_run)>0){
-                                    foreach($search_run as $search):
-                                        ?>
-                                            <div>
-                                                <a 
-                                                    href="index.php?id=<?php echo $search['id']; ?>"
-                                                    style="text-decoration: none; font-size: 25px;"
-                                                >
-                                                <p><?= $search['title']; ?></p>
-                                                </a>
-                                            </div>
-                                        <?php
-                                    endforeach;
-                            }  
-                            else{
-                                echo "Нет результата поиска";
+                            <?php
+                            if(mysqli_num_rows($questions_run)>0)
+                            {
+                                foreach($questions_run as $questions):
+                                    ?>
+                                            <h3><?php echo $questions['question'];?></h3>
+                                    <?php
+                                endforeach;
                             }
-                            ?>
+                        ?>
                         </div>
-                    </div>  
+                    </div>
                 </div>
             </div>
         </div>

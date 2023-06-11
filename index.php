@@ -40,12 +40,12 @@
     if ($questionCount >= $questionNum) {
         $showForm = 1;
 
-        $res = $db->query("SELECT * FROM questions WHERE test_id = {$testId} LIMIT {$questionStart}, 1");
+        $res = $db->query("SELECT * FROM questions WHERE test_id = {$testId} LIMIT {$questionStart}, 1 ");
         $row = $res->fetch();
         $question = $row['question'];
         $questionId = $row['id'];
 
-        $res = $db->query("SELECT * FROM answers WHERE question_id = {$questionId}");
+        $res = $db->query("SELECT * FROM answers WHERE question_id = {$questionId} ORDER BY rand()");
         $answers = $res->fetchAll();
     } 
     else {
@@ -69,7 +69,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <div class="content">
+    <div class="content mb-5">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="admin.php">ТЕСТЫ</a>
@@ -91,7 +91,7 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
+        <div class="container form-test">
             <?php if ($showForm) { ?>
                 <form action="index.php?id=<?php echo $testId; ?>" method="post">
                     <input type="hidden" name="q" value="<?php echo $questionNum; ?>">
@@ -107,9 +107,11 @@
                                 </div>
                                 <div class="card-body">
                                     <?php foreach ($answers AS $answer) { ?>
+                                        
                                         <div>
                                             <input type="radio" name="answer_id" required value="<?php echo $answer['id']; ?>"> <?php echo $answer['answer']; ?>
                                         </div>
+                                    
                                     <?php } ?>
                                 </div>
                             </div>
@@ -139,8 +141,11 @@
                                 </div>
                             </div>
                             <div class="card-body d-flex justify-content-center">
-                                <a href="admin.php">Вернуться на главную</a>
+                                <a href="admin.php">Вернуться на главную</a>  
                             </div>
+                            <div class="card-body d-flex justify-content-center">
+                                <a href="result.php?id=<?php echo $testId; ?>">Посмотреть результат</a>  
+                            </div> 
                         </div>
                     </div>
                 </div>
