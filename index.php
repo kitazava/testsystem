@@ -11,6 +11,7 @@
     if (!isset($_SESSION['test_id']) || $_SESSION['test_id'] != $testId) {
         $_SESSION['test_id'] = $testId;
         $_SESSION['test_score'] = 0;
+
     }
 
     $res = $db->query("SELECT * FROM tests WHERE id = {$testId}");
@@ -72,7 +73,6 @@
     <div class="content mb-5">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="admin.php">ТЕСТЫ</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -109,16 +109,22 @@
                                     <?php foreach ($answers AS $answer) { ?>
                                         
                                         <div>
-                                            <input type="radio" name="answer_id" required value="<?php echo $answer['id']; ?>"> <?php echo $answer['answer']; ?>
+                                            
+                                            <input type="radio" name="answer_id" required value="<?php echo $answer['id']; ?>"> 
+                                            <?php echo $answer['answer']; ?>
+                                      
                                         </div>
-                                    
+                                       
                                     <?php } ?>
+                                   
                                 </div>
                             </div>
                             <div class="text-center mt-3">
                                 <?php if ($questionCount == $questionNum) { ?>
+                                   
                                     <button type="submit" class="btn btn-success">Получить результат</button>
                                 <?php } else { ?>
+                                  
                                     <button type="submit" class="btn btn-primary">Дальше</button>
                                 <?php } ?>
                             </div>
@@ -133,26 +139,28 @@
                                 <h3>Ваш результат</h3>
                             </div>
                             <div class="card-body">
-                                <div class="result-print d-flex justify-content-center">
+                                <div class="result-print d-flex justify-content-center f-wrap">
                                     <?php echo $result; ?>
                                     <p> :</p>
                                     <?php echo $score; ?>
+                                    
                                     <?php unset($_SESSION['test_score']); ?>
+                                    
                                 </div>
                             </div>
                             <div class="card-body d-flex justify-content-center">
                                 <a href="admin.php">Вернуться на главную</a>  
                             </div>
-                            <div class="card-body d-flex justify-content-center">
-                                <a href="result.php?id=<?php echo $testId; ?>">Посмотреть результат</a>  
-                            </div> 
                         </div>
                     </div>
                 </div>
             <?php } ?>
         </div>
     </div>
-    
+
+
+
+
     <div class="footer">
         <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">

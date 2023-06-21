@@ -26,10 +26,6 @@
                         <label for="title" class="form-label">Название теста</label>
                         <input type="text" name="title" id="title" class="form-control">
                     </div>
-                    <div>
-                        <label for="title" class="form-label">Язык программирования</label>
-                        <input type="text" name="language" id="language" class="form-control">
-                    </div>
                     <div class="mt-5 text-center">
                         <h4>Добавление вопросов</h4>
                     </div>

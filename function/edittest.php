@@ -34,9 +34,13 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="exampleInputEmail" class="form-label">Язык программирования</label>
-                                            <input type="text" name="language" value="<?= $test['type_language']; ?>" class="form-control" id="exampleInputEmail">
+                                            <input type="text" name="type_id" value="<?= $test['type_id']; ?>" class="form-control" id="exampleInputEmail">
                                         </div>
-                                        <button type="submit" name="edit_test" class="btn btn-primary">Сохранить</button>
+                                        <button type="submit" name="edit_test" 
+                                        class="btn btn-primary"
+                                        onclick="if (!confirm('Вы действительно хотите продолжить сохранение?')) return false"
+                                        >
+                                        Сохранить</button>
                                     </form>
                                 <?php
                             }

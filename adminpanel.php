@@ -12,6 +12,8 @@
     $answers_run = mysqli_query($connect, $answers);
     $results = "SELECT * FROM results";
     $results_run = mysqli_query($connect, $results);
+    $types = "SELECT * FROM f_type";
+    $types_run = mysqli_query($connect, $types);
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +38,10 @@
             </form>
         </div>
         <div class="container">
-            <a href="addtest.php" class="btn btn-primary btn-sm">Добавить</a>
+            <a href="addtest.php" class="btn btn-primary btn-sm">Добавить тест</a>
+        </div>
+        <div class="container">
+            <a href="./function/addtype.php" class="btn btn-primary btn-sm">Добавить язык</a>
         </div>
         <div class="container mt-5">
             <div class="table-wrapper-scroll-y my-custom-scrollbar" style="border: 1px solid #000000">
@@ -48,7 +53,7 @@
                         <tr>
                             <th scope="col">#ID</th>
                             <th scope="col">Название теста</th>
-                            <th scope="col">Язык программирования</th>
+                            <th scope="col">ID фильтра</th>
                             <th scope="col">Операции</th>
                         </tr>
                     </thead>
@@ -61,12 +66,55 @@
                                         <tr>
                                         <th scope="row"> <?php echo $test['id'];?> </th>
                                             <td><?php echo $test['title']; ?></td>
-                                            <td><?php echo $test['type_language']; ?></td>
+                                            <td><?php echo $test['type_id']; ?></td>
                                             <td>
                                                 <a href="./function/edittest.php?id=<?=$test['id']; ?>" class="btn btn-success btn-sm">Редактировать</a>
                                                 <a href="./function/complementtest.php?=<?=$test['id']; ?>" class="btn btn-secondary btn-sm">Дополнить тест</a>
                                                 <form action="./function/operations.php" method="POST" class="d-inline">
-                                                    <button type="submit" name="delete_test" value="<?=$test['id']; ?>" class="btn btn-danger btn-sm">Удалить</button>
+                                                    <button type="submit" name="delete_test" value="<?=$test['id']; ?>" 
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="if (!confirm('Вы действительно хотите удалить эту запись?')) return false"
+                                                    >Удалить</button>
+                                                </form>
+                                            </td>
+                                            
+                                        </tr>
+                                <?php
+                            endforeach;
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="container mt-5">
+            <div class="table-wrapper-scroll-y my-custom-scrollbar" style="border: 1px solid #000000">
+                <div class="card-header">
+                    <h2 class="text-center">Таблица фильтров</h2>
+                </div>
+                <table class="table table-bordered mb-0 ">
+                    <thead>
+                        <tr>
+                            <th scope="col">#ID</th>
+                            <th scope="col">Язык</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        if(mysqli_num_rows($types_run)>0)
+                        {
+                            foreach($types_run as $type):
+                                ?>
+                                        <tr>
+                                        <th scope="row"> <?php echo $type['id'];?> </th>
+                                            <td><?php echo $type['type']; ?></td>
+                                            <td>
+                                                <a href="./function/edittype.php?id=<?=$type['id']; ?>" class="btn btn-success btn-sm">Редактировать</a>
+                                                <form action="./function/operations.php" method="POST" class="d-inline">
+                                                    <button type="submit" name="delete_type" value="<?=$type['id']; ?>"
+                                                    class="btn btn-danger btn-sm"
+                                                    onclick="if (!confirm('Вы действительно хотите удалить эту запись?')) return false"
+                                                    >Удалить</button>
                                                 </form>
                                             </td>
                                             
@@ -107,7 +155,11 @@
                                                         <td>
                                                             <a href="./function/editquestion.php?id=<?=$question['id']; ?>?test_id=<?=$question['test_id'];?>" class="btn btn-success btn-sm">Редактировать</a>
                                                             <form action="./function/operations.php" method="POST" class="d-inline">
-                                                                <button type="submit" name="delete_question" value="<?=$question['id']; ?>" class="btn btn-danger btn-sm">Удалить</button>
+                                                                <button type="submit" name="delete_question" value="<?=$question['id']; ?>"
+                                                                class="btn btn-danger btn-sm"
+                                                                onclick="if (!confirm('Вы действительно хотите удалить эту запись?')) return false"
+                                                                >
+                                                                Удалить</button>
                                                             </form>
                                                         </td>
                                                     </tr>
@@ -150,7 +202,10 @@
                                                         <td>
                                                             <a href="./function/editanswer.php?id=<?=$answer['id']; ?>?question_id=<?=$answer['question_id'];?>" class="btn btn-success btn-sm">Редактировать</a>
                                                             <form action="./function/operations.php" method="POST" class="d-inline">
-                                                                <button type="submit" name="delete_answer" value="<?=$answer['id']; ?>" class="btn btn-danger btn-sm">Удалить</button>
+                                                                <button type="submit" name="delete_answer" value="<?=$answer['id']; ?>"
+                                                                class="btn btn-danger btn-sm"
+                                                                onclick="if (!confirm('Вы действительно хотите удалить эту запись?')) return false"
+                                                                >Удалить</button>
                                                             </form>
                                                         </td>
                                                     </tr>
@@ -195,7 +250,10 @@
                                                         <td>
                                                             <a href="./function/editresult.php?id=<?=$result['id'];?>?id=<?=$result['test_id']; ?>" class="btn btn-success btn-sm">Редактировать</a>
                                                             <form action="./function/operations.php" method="POST" class="d-inline">
-                                                                <button type="submit" name="delete_result" value="<?=$result['id']; ?>" class="btn btn-danger btn-sm">Удалить</button>
+                                                                <button type="submit" name="delete_result" value="<?=$result['id']; ?>"
+                                                                class="btn btn-danger btn-sm"
+                                                                onclick="if (!confirm('Вы действительно хотите удалить эту запись?')) return false"
+                                                                >Удалить</button>
                                                             </form>
                                                         </td>
                                                     </tr>

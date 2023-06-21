@@ -36,7 +36,11 @@
                                             <label for="exampleInputName" class="form-label">Балл за ответ</label>
                                             <input type="text" name="score" value="<?= $answer['score']; ?>" class="form-control" id="exampleInputName" >
                                         </div>
-                                        <button type="submit" name="edit_answer" class="btn btn-primary">Сохранить</button>
+                                        <button type="submit" name="edit_answer" 
+                                        class="btn btn-primary"
+                                        onclick="if (!confirm('Вы действительно хотите продолжить сохранение?')) return false"
+                                        >
+                                        Сохранить</button>
                                     </form>
                                 <?php
                             }

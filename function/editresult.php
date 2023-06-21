@@ -40,7 +40,11 @@
                                             <label for="exampleInputName" class="form-label">Результат</label>
                                             <input type="text" name="result" value="<?= $result['result']; ?>" class="form-control" id="exampleInputName" >
                                         </div>
-                                        <button type="submit" name="edit_result" class="btn btn-primary">Сохранить</button>
+                                        <button type="submit" name="edit_result" 
+                                        class="btn btn-primary"
+                                        onclick="if (!confirm('Вы действительно хотите продолжить сохранение?')) return false"
+                                        >
+                                        Сохранить</button>
                                     </form>
                                 <?php
                             }

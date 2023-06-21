@@ -20,19 +20,19 @@
                 <div class="card-body">
                         <?php
                         if(isset($_GET['id'])){
-                            $question_id = mysqli_real_escape_string($connect,$_GET['id']);
-                            $query = "SELECT * FROM questions WHERE id='$question_id'";
+                            $type_id = mysqli_real_escape_string($connect,$_GET['id']);
+                            $query = "SELECT * FROM f_type WHERE id='$type_id'";
                             $query_run = mysqli_query($connect,$query);
                             if(mysqli_num_rows($query_run)>0){
-                                $question = mysqli_fetch_array($query_run);
+                                $type = mysqli_fetch_array($query_run);
                                 ?>
                                     <form method="POST" action="operations.php" autocomplete="off">
-                                        <input type="hidden" name="question_id" value="<?= $question['id']; ?>">
+                                        <input type="hidden" name="type_id" value="<?= $type['id']; ?>">
                                         <div class="mb-3">
-                                            <label for="exampleInputName" class="form-label">Вопрос</label>
-                                            <input type="text" name="question" value="<?= $question['question']; ?>" class="form-control" id="exampleInputName" >
+                                            <label for="exampleInputName" class="form-label">Язык программирования</label>
+                                            <input type="text" name="type" value="<?= $type['type']; ?>" class="form-control" id="exampleInputName" >
                                         </div>
-                                        <button type="submit" name="edit_question" 
+                                        <button type="submit" name="edit_type"
                                         class="btn btn-primary"
                                         onclick="if (!confirm('Вы действительно хотите продолжить сохранение?')) return false"
                                         >

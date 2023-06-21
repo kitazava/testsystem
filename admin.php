@@ -6,10 +6,9 @@
     if ($do == 'save') {
         $title = trim($_POST['title']);
         $type_language = trim($_POST['language']);
-        $res = $db->prepare("INSERT IGNORE INTO tests (`title`,`type_language`) VALUES (:title,:type_language)");
+        $res = $db->prepare("INSERT IGNORE INTO tests (`title`) VALUES (:title)");
         $res->execute([
             ':title' => $title,
-            ':type_language' => $type_language
         ]);
         $testId = $db->lastInsertId();
 
@@ -94,7 +93,6 @@
     <div class="content">
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">ТЕСТЫ</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
                 </button>
@@ -113,31 +111,71 @@
                 </div>
             </div>
         </nav>
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card mt-4">
-                        <div class="card-header">
-                                <h2 class="text-center">Поиск</h2>
-                        </div>
-                        <div class="card-body">
-                            <form action="search.php" method="GET">
-                                <div class="input-group">
-                                    <div class="form-outline">
-                                        <input type="search_inp" id="form1" name="search" class="form-control" />
-                                    </div>
-                                    <button type="submit"  class="btn btn-primary">Поиск</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>  
+        <div class="container" style="margin-top: 80px;">
+            <div class="row">
+                <div class="col-md-12">
+                        <form action="search.php" method="GET">
+                            <div class="input-group">
+                                <input type="search_inp" id="form1" name="search" class="form-control" placeholder="Поиск"  />
+                                <button type="submit" class="btn btn-primary">Поиск</button>
+                            </div>
+                        </form>       
                 </div>
-
-                <?php include_once 'inc/' . $do . '.php'; ?>
-
+                    
+                
+                <div class="col-md-3">
+                    <form action="" method="GET">
+                        <div class="card mt-3">
+                            <div class="card-header">
+                                <h5>Фильтр 
+                                    <button type="submit" class="btn btn-primary btn-sm float-end">Фильтровать</button>
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <hr>
+                                <?php
+                                    $type_query = "SELECT * FROM f_type";
+                                    $type_query_run = mysqli_query($connect,$type_query );
+                                    if(mysqli_num_rows($type_query_run)>0)
+                                    {
+                                        foreach($type_query_run as $type)
+                                        {
+                                            $checked = [];
+                                            if(isset($_GET['type']))
+                                            {
+                                                $checked = $_GET['type'];
+                                            }
+                                            ?>
+                                                <div>
+                                                    <input class="form-check-input" type="checkbox" name="type[]" value="<?=$type['id']; ?>"
+                                                    <?php if(in_array($type['id'], $checked)) { echo "checked";}?>
+                                                    />
+                                                    <?= $type['type']; ?>
+                                                </div>
+                                            <?php
+                                        }
+                                    }
+                                    else
+                                    {
+                                        echo "Нет найденных языков";
+                                    }
+                                ?>
+                                <hr>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-9 mt-3">
+                    <div class="card ">
+                        <div class="card-body row">
+                            <?php include_once 'inc/' . $do . '.php'; ?>
+                            
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+   
     <div class="footer">
         <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">

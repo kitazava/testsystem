@@ -3,9 +3,9 @@
     
     if(isset($_POST['edit_test'])){
         $title = mysqli_real_escape_string($connect, $_POST['title']);
-        $language = mysqli_real_escape_string($connect, $_POST['language']);
+        $type_id = mysqli_real_escape_string($connect, $_POST['type_id']);
         $test_id = mysqli_real_escape_string($connect, $_POST['test_id']);
-        $query = "UPDATE  tests SET  title='$title', type_language='$language' WHERE id='$test_id'";
+        $query = "UPDATE  tests SET  title='$title', type_id='$type_id' WHERE id='$test_id'";
         $query_run = mysqli_query($connect,$query);
         header('Location: ../adminpanel.php');
     }
@@ -65,3 +65,28 @@
         $query_run = mysqli_query($connect,$query);
         header('Location: ../adminpanel.php');
     }
+
+    if(isset($_POST['edit_type'])){
+        $type = mysqli_real_escape_string($connect, $_POST['type']);
+        $type_id = mysqli_real_escape_string($connect, $_POST['type_id']);
+        $query = "UPDATE f_type SET type='$type' WHERE id='$type_id'";
+        $query_run = mysqli_query($connect,$query);
+        header('Location: ../adminpanel.php');
+    }
+
+    if(isset($_POST['delete_type'])){
+        $type_id = mysqli_real_escape_string($connect, $_POST['delete_type']);
+        $query = "DELETE FROM f_type WHERE id='$type_id'";
+        $query_run = mysqli_query($connect,$query);
+        header('Location: ../adminpanel.php');
+    }
+
+    if(isset($_POST['add_type'])){
+        $type = mysqli_real_escape_string($connect, $_POST['addtype']);
+        $query = "INSERT INTO f_type (type) VALUES ('$type') ";
+        $query_run = mysqli_query($connect,$query);
+        header('Location: ../adminpanel.php');
+    }
+
+    
+    

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 23 2023 г., 21:46
+-- Время создания: Июн 21 2023 г., 22:51
 -- Версия сервера: 8.0.30
 -- Версия PHP: 7.2.34
 
@@ -64,9 +64,7 @@ INSERT INTO `answers` (`id`, `question_id`, `answer`, `score`) VALUES
 (41, 13, 'onclick', 1),
 (42, 14, 'alert(\'Hello World\');', 1),
 (43, 14, 'msg(\'Hello World\');', 0),
-(44, 14, 'alertBox(\'Hello World\');', 0),
 (45, 14, 'msgBox(\'Hello World\')', 0),
-(46, 14, 'alertBox(\"Hello World\")', 0),
 (47, 15, 'for i = 1 to 10', 0),
 (48, 15, 'for (i = 0; i <= 10)', 0),
 (49, 15, 'for (i = 0; i <= 10; i++)', 1),
@@ -108,7 +106,33 @@ INSERT INTO `answers` (`id`, `question_id`, `answer`, `score`) VALUES
 (85, 26, 'applet', 0),
 (86, 26, 'script', 1),
 (90, 29, 'Нет', 1),
-(91, 31, 'Да', 1);
+(91, 29, 'Да', 0),
+(93, 32, 'Да', 1),
+(94, 32, 'Нет', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `f_type`
+--
+
+CREATE TABLE `f_type` (
+  `id` int NOT NULL,
+  `type` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `f_type`
+--
+
+INSERT INTO `f_type` (`id`, `type`) VALUES
+(1, 'CSS'),
+(2, 'JavaScript'),
+(3, 'C++'),
+(4, 'C#'),
+(5, 'HTML'),
+(6, 'Python'),
+(7, 'Java');
 
 -- --------------------------------------------------------
 
@@ -184,17 +208,17 @@ INSERT INTO `results` (`id`, `test_id`, `score_min`, `score_max`, `result`) VALU
 CREATE TABLE `tests` (
   `id` int NOT NULL,
   `title` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type_language` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `type_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Дамп данных таблицы `tests`
 --
 
-INSERT INTO `tests` (`id`, `title`, `type_language`) VALUES
-(5, 'Тест JavaScript', 'JavaScript'),
-(6, 'Тест HTML', 'HTML'),
-(13, 'Теcт CSS', 'CSS');
+INSERT INTO `tests` (`id`, `title`, `type_id`) VALUES
+(5, 'Тест JavaScript', 2),
+(6, 'Тест HTML', 5),
+(13, 'Теcт CSS', 1);
 
 -- --------------------------------------------------------
 
@@ -216,7 +240,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `full_name`, `login`, `email`, `password`, `avatar`) VALUES
-(10, 'Кит Иван Васильевич', 'ivan_kit', 'ivankit@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL);
+(10, 'Кит Иван Васильевич', 'ivan_kit', 'ivankit@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL),
+(11, 'Ваня Кит', 'admin', 'vanya_kit@gmail.com', '21232f297a57a5a743894a0e4a801fc3', NULL);
 
 --
 -- Индексы сохранённых таблиц
@@ -226,6 +251,12 @@ INSERT INTO `users` (`id`, `full_name`, `login`, `email`, `password`, `avatar`) 
 -- Индексы таблицы `answers`
 --
 ALTER TABLE `answers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `f_type`
+--
+ALTER TABLE `f_type`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -260,31 +291,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+
+--
+-- AUTO_INCREMENT для таблицы `f_type`
+--
+ALTER TABLE `f_type`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT для таблицы `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT для таблицы `results`
 --
 ALTER TABLE `results`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT для таблицы `tests`
 --
 ALTER TABLE `tests`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
